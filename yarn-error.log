@@ -1,0 +1,37 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add express multer mongoose
+
+PATH: 
+  C:\Users\RLWB\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\RLWB\bin;C:\Program Files (x86)\Parallels\Parallels Tools\Applications;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Users\RLWB\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\NetSarang\Xshell 7;C:\Program Files (x86)\Tencent\微信web开发者工具\dll;C:\Program Files\Git\cmd;C:\Users\RLWB\AppData\Local\Microsoft\WindowsApps;C:\Users\RLWB\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\RLWB\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\heroku\bin;C:\Program Files\MongoDB\Server\5.0\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, open 'C:\Users\RLWB\AppData\Local\Yarn\Cache\v6\npm-@aws-sdk-credential-provider-sso-3.212.0-c74ae70a3c214c8dd131dfb688d15f0cc355def5-integrity\node_modules\@aws-sdk\credential-provider-sso\.yarn-metadata.json'
+
+npm manifest: 
+  {
+    "name": "nodejs-blog-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
