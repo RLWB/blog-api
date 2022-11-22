@@ -13,7 +13,8 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
     });
     const user = await newUser.save();
-    res.status(200).json(user);
+    const { password, ...others } = user._doc;
+    res.status(200).json(others);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -26,9 +27,12 @@ router.post("/login", async (req, res) => {
     if (md5(req.body.password) !== user.password)
       return res.status(400).json("密码错误");
     const { password, ...others } = user._doc;
-    return res
-      .status(200)
-      .json({ ...others, token: jwt.sign({ ...others }, key) });
+    return res.status(200).json({
+      ...others,
+      token: jwt.sign({ ...others }, key, {
+        expiresIn: "600s",
+      }),
+    });
   } catch (error) {
     res.status(500).json(error);
   }
