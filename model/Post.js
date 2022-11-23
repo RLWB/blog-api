@@ -6,6 +6,11 @@ const PostSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    collected: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     desc: {
       type: String,
       required: true,
@@ -22,6 +27,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    collectionsIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

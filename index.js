@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const authRoute = require("./router/auth");
 const postsRoute = require("./router/posts");
+const collectRoute = require("./router/collection");
 const handleToken = require("./middleWares/index");
 app.use(express.json());
 
@@ -18,6 +19,7 @@ mongoose
   .catch((err) => console.log("出错了：", err));
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
+app.use("/api/post/collect", collectRoute);
 app.listen(5000, () => {
   console.log(`Server is running in http://localhost:5000`);
 });

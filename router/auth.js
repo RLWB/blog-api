@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
     return res.status(200).json({
       ...others,
       token: jwt.sign({ ...others }, key, {
-        expiresIn: "600s",
+        expiresIn: "6000s",
       }),
     });
   } catch (error) {
