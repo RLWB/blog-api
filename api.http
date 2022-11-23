@@ -1,0 +1,22 @@
+@baseUrl=http://localhost:5001/api
+
+# POST {{baseUrl}}/auth/login HTTP/1.1
+# content-type: application/json
+
+# {
+#     "username": "rlwb",
+#     "password": "666"
+# }
+
+# POST {{baseUrl}}/posts HTTP/1.1
+# content-type: application/json
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9ucyI6W10sIl9pZCI6IjYzN2IyYjU1YTk4MDhiMzdhNWY2MDkzZSIsInVzZXJuYW1lIjoicmx3YiIsImF2YXRhciI6Imh0dHBzOi8vdHM0LmNuLm1tLmJpbmcubmV0L3RoP2lkPU9JUC5DWnBqLUpEUzNzYVNaTmRzQ2xsNWxnSGFIYSZ3PTgwJmg9ODAmYz03JnJzPTEmcWx0PTEwMCZvPTYmZHByPTIuMiZwaWQ9QWxnb0Jsb2NrIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0yMVQwNzo0MDowNS4zOTBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0yMVQwNzo0MDowNS4zOTBaIiwiX192IjowLCJpYXQiOjE2NjkyMTY3MzUsImV4cCI6MTY2OTIyMjczNX0.0zcUWx_yExfXtyKmARj6EE-5u9XNRxb3B7XRJNqIBuw
+
+# {
+#     "title": "rlwb123",
+#     "desc": "jsdjksjdk",
+#     "photo": "jsjddjs",
+#     "category": "问答"
+# }
+GET {{baseUrl}}/posts?key=rlwb123 HTTP/1.1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9ucyI6W10sIl9pZCI6IjYzN2IyYjU1YTk4MDhiMzdhNWY2MDkzZSIsInVzZXJuYW1lIjoicmx3YiIsImF2YXRhciI6Imh0dHBzOi8vdHM0LmNuLm1tLmJpbmcubmV0L3RoP2lkPU9JUC5DWnBqLUpEUzNzYVNaTmRzQ2xsNWxnSGFIYSZ3PTgwJmg9ODAmYz03JnJzPTEmcWx0PTEwMCZvPTYmZHByPTIuMiZwaWQ9QWxnb0Jsb2NrIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0yMVQwNzo0MDowNS4zOTBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0yMVQwNzo0MDowNS4zOTBaIiwiX192IjowLCJpYXQiOjE2NjkyMTY3MzUsImV4cCI6MTY2OTIyMjczNX0.0zcUWx_yExfXtyKmARj6EE-5u9XNRxb3B7XRJNqIBuw

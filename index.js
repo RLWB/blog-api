@@ -20,6 +20,6 @@ mongoose
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/post/collect", collectRoute);
-app.listen(5000, () => {
-  console.log(`Server is running in http://localhost:5000`);
+app.listen(5001, () => {
+  console.log(`Server is running in http://localhost:5001`);
 });
