@@ -37,10 +37,7 @@ router.get("/", verityToken, async (req, res) => {
     } else if (category) {
       posts = await Post.find({ category }).populate("userId");
     } else if (key) {
-      posts = await Post.find(query).populate({
-        path: "userId",
-        select: "avatar -_id",
-      });
+      posts = await Post.find(query).populate("userId");
     } else {
       posts = await Post.find().populate("userId");
     }
@@ -67,9 +64,9 @@ router.get("/", verityToken, async (req, res) => {
 router.delete("/:id", handleToken, async (req, res) => {
   const user = req.user;
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("userId");
     console.log(post);
-    if (post.username === user.username) {
+    if (post.userId.username === user.username) {
       try {
         await post.delete();
         res.status(200).json("删除成功");

@@ -11,6 +11,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       password: cryptPass,
       email: req.body.email,
+      avatar: "https://dummyimage.com/200x200?text=" + req.body.username,
     });
     const user = await newUser.save();
     const { password, ...others } = user._doc;
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
     return res.status(200).json({
       ...others,
       token: jwt.sign({ ...others }, key, {
-        expiresIn: "6000s",
+        expiresIn: "360000s",
       }),
     });
   } catch (error) {
