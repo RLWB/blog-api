@@ -30,7 +30,10 @@ router.post("/", handleToken, async (req, res) => {
 });
 router.get("/", handleToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("collections");
+    const user = await User.findById(req.user._id).populate({
+      path: "collections",
+      populate: "userId",
+    });
     user.collections.forEach((item) => (item.collected = true));
     res.status(200).json(user.collections);
   } catch (error) {
