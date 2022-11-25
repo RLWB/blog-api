@@ -35,28 +35,31 @@ router.get("/", verityToken, async (req, res) => {
     if (username) {
       posts = await Post.find({ username })
         .sort({ createdAt: -1 })
-        .populate("userId");
+        .populate("userId")
+        .lean();
     } else if (category) {
       posts = await Post.find({ category })
         .sort({ createdAt: -1 })
-        .populate("userId");
+        .populate("userId")
+        .lean();
     } else if (key) {
-      posts = await Post.find(query).sort({ createdAt: -1 }).populate("userId");
+      posts = await Post.find(query)
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     } else {
-      posts = await Post.find().sort({ createdAt: -1 }).populate("userId");
+      posts = await Post.find()
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     }
+    console.log(req.user);
     if (req.user) {
-      const user = req.user;
+      const user = await User.findById(req.user._id);
+      console.log(user);
       if (!user) return res.status(200).json(posts);
-      // await Post.findByIdAndUpdate(
-      //   { $in: user.collections },
-      //   { $set: { collected: true } }
-      // );
-      // posts = await Post.find();
       posts.forEach((item) => {
-        console.log(item._id);
-        console.log(user.collections);
-        if (user.collections.indexOf(item._id.toString()) >= 0) {
+        if (user.collections.indexOf(item._id) >= 0) {
           item.collected = true;
         }
       });

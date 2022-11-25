@@ -2,10 +2,11 @@ const router = require("express").Router();
 const User = require("../model/User");
 const Post = require("../model/Post");
 const Collection = require("../model/Collection");
+const mongoose = require("mongoose");
 const handleToken = require("../middleWares");
 //收藏，取消收藏
 router.post("/", handleToken, async (req, res) => {
-  const id = req.body.id;
+  const id = mongoose.Types.ObjectId(req.body.id);
   try {
     const user = await User.findById(req.user._id);
     if (!user) return res.status(401).json("重新登录");
