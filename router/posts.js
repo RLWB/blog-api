@@ -33,23 +33,33 @@ router.get("/", verityToken, async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username }).populate("userId");
+      posts = await Post.find({ username })
+        .sort({ createdAt: -1 })
+        .populate("userId");
     } else if (category) {
-      posts = await Post.find({ category }).populate("userId");
+      posts = await Post.find({ category })
+        .sort({ createdAt: -1 })
+        .populate("userId");
     } else if (key) {
-      posts = await Post.find(query).populate("userId");
+      posts = await Post.find(query).sort({ createdAt: -1 }).populate("userId");
     } else {
-      posts = await Post.find().populate("userId");
+      posts = await Post.find().sort({ createdAt: -1 }).populate("userId");
     }
     if (req.user) {
-      const user = await User.findById(req.user._id);
+      const user = req.user;
       if (!user) return res.status(200).json(posts);
+      // await Post.findByIdAndUpdate(
+      //   { $in: user.collections },
+      //   { $set: { collected: true } }
+      // );
+      // posts = await Post.find();
       posts.forEach((item) => {
-        if (user.collections.indexOf(item._id) >= 0) {
+        console.log(item._id);
+        console.log(user.collections);
+        if (user.collections.indexOf(item._id.toString()) >= 0) {
           item.collected = true;
         }
       });
-      return res.status(200).json(posts);
     }
     return res.status(200).json(posts);
 
