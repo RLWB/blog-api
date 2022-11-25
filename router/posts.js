@@ -33,30 +33,54 @@ router.get("/", verityToken, async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username }).populate("userId");
+      posts = await Post.find({ username })
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     } else if (category) {
-      posts = await Post.find({ category }).populate("userId");
+      posts = await Post.find({ category })
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     } else if (key) {
-      posts = await Post.find(query).populate("userId");
+      posts = await Post.find(query)
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     } else {
-      posts = await Post.find().populate("userId");
+      posts = await Post.find()
+        .sort({ createdAt: -1 })
+        .populate("userId")
+        .lean();
     }
-    posts.forEach((item) => {
-      if (!req.user) {
-        item.collected = false;
-      } else {
-        let index = item.collectionsIds.indexOf(req.user._id);
-        console.log(index);
-        if (index >= 0) {
+    console.log(req.user);
+    if (req.user) {
+      const user = await User.findById(req.user._id);
+      console.log(user);
+      if (!user) return res.status(200).json(posts);
+      posts.forEach((item) => {
+        if (user.collections.indexOf(item._id) >= 0) {
           item.collected = true;
-        } else {
-          item.collected = false;
         }
-      }
-    });
+      });
+    }
+    return res.status(200).json(posts);
 
-    res.status(200).json(posts);
+    // posts.forEach((item) => {
+    //   if (!req.user) {
+    //     item.collected = false;
+    //   } else {
+    //     let index = item.collectionsIds.indexOf(req.user._id);
+    //     console.log(index);
+    //     if (index >= 0) {
+    //       item.collected = true;
+    //     } else {
+    //       item.collected = false;
+    //     }
+    //   }
+    // });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 });
