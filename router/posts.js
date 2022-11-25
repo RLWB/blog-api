@@ -41,22 +41,33 @@ router.get("/", verityToken, async (req, res) => {
     } else {
       posts = await Post.find().populate("userId");
     }
-    posts.forEach((item) => {
-      if (!req.user) {
-        item.collected = false;
-      } else {
-        let index = item.collectionsIds.indexOf(req.user._id);
-        console.log(index);
-        if (index >= 0) {
+    if (req.user) {
+      const user = await User.findById(req.user._id);
+      if (!user) return res.status(200).json(posts);
+      posts.forEach((item) => {
+        if (user.collections.indexOf(item._id) >= 0) {
           item.collected = true;
-        } else {
-          item.collected = false;
         }
-      }
-    });
+      });
+      return res.status(200).json(posts);
+    }
+    return res.status(200).json(posts);
 
-    res.status(200).json(posts);
+    // posts.forEach((item) => {
+    //   if (!req.user) {
+    //     item.collected = false;
+    //   } else {
+    //     let index = item.collectionsIds.indexOf(req.user._id);
+    //     console.log(index);
+    //     if (index >= 0) {
+    //       item.collected = true;
+    //     } else {
+    //       item.collected = false;
+    //     }
+    //   }
+    // });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 });
