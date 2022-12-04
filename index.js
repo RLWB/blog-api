@@ -5,14 +5,14 @@ const authRoute = require("./router/auth");
 const postsRoute = require("./router/posts");
 const collectRoute = require("./router/collection");
 const categoryRoute = require("./router/categories");
-const handleToken = require("./middleWares/index");
+const weixinloginRoute = require("./router/weixinlogin");
 app.use(express.json());
 
 mongoose
   .connect(
-    "mongodb+srv://root:googledns8888@cluster0.bnhuhf8.mongodb.net/?retryWrites=true&w=majority",
+    // "mongodb+srv://root:googledns8888@cluster0.bnhuhf8.mongodb.net/?retryWrites=true&w=majority",
     // "mongodb://112.124.0.240:27017/blog",
-//     "mongodb://0.0.0.0:27017/blogs",
+    "mongodb://0.0.0.0:27017/blogs",
     {
       useNewURLParser: true,
     }
@@ -23,6 +23,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/post/collect", collectRoute);
 app.use("/api/categories", categoryRoute);
+app.use("/api/weixinlogin", weixinloginRoute);
 app.listen(5000, () => {
   console.log(`Server is running in http://localhost:5000`);
 });
