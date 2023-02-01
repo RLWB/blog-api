@@ -84,6 +84,15 @@ router.get("/", verityToken, async (req, res) => {
     res.status(500).json(error);
   }
 });
+//查询文章详情
+router.get("/:id", verityToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id).populate("userId");
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 //删除文章
 router.delete("/:id", handleToken, async (req, res) => {
   const user = req.user;

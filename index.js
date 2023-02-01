@@ -10,9 +10,10 @@ app.use(express.json());
 
 mongoose
   .connect(
-    // "mongodb+srv://root:googledns8888@cluster0.bnhuhf8.mongodb.net/?retryWrites=true&w=majority",
+    //数据库地址
+    "mongodb+srv://root:googledns8888@cluster0.bnhuhf8.mongodb.net/?retryWrites=true&w=majority",
     // "mongodb://112.124.0.240:27017/blog",
-    "mongodb://0.0.0.0:27017/blogs",
+    // "mongodb://0.0.0.0:27017/blogs",
     {
       useNewURLParser: true,
     }
