@@ -25,7 +25,7 @@ router.get("/", verityToken, async (req, res) => {
   const category = req.query.cat;
   const key = req.query.key;
   const pageOptions = {
-    page: parseInt(req.query.page, 10) || 1,
+    page: parseInt(req.query.page, 10) || 0,
     limit: parseInt(req.query.limit, 10) || 10,
   };
   const query = {
