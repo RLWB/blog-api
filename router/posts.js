@@ -24,6 +24,10 @@ router.get("/", verityToken, async (req, res) => {
   const username = req.query.user;
   const category = req.query.cat;
   const key = req.query.key;
+  const pageOptions = {
+    page: parseInt(req.query.page, 10) || 1,
+    limit: parseInt(req.query.limit, 10) || 10,
+  };
   const query = {
     title: {
       $regex: key,
@@ -34,21 +38,29 @@ router.get("/", verityToken, async (req, res) => {
     let posts;
     if (username) {
       posts = await Post.find({ username })
+        .skip(pageOptions.page * pageOptions.limit)
+        .limit(pageOptions.limit)
         .sort({ createdAt: -1 })
         .populate("userId")
         .lean();
     } else if (category) {
       posts = await Post.find({ category })
+        .skip(pageOptions.page * pageOptions.limit)
+        .limit(pageOptions.limit)
         .sort({ createdAt: -1 })
         .populate("userId")
         .lean();
     } else if (key) {
       posts = await Post.find(query)
+        .skip(pageOptions.page * pageOptions.limit)
+        .limit(pageOptions.limit)
         .sort({ createdAt: -1 })
         .populate("userId")
         .lean();
     } else {
       posts = await Post.find()
+        .skip(pageOptions.page * pageOptions.limit)
+        .limit(pageOptions.limit)
         .sort({ createdAt: -1 })
         .populate("userId")
         .lean();
@@ -64,7 +76,9 @@ router.get("/", verityToken, async (req, res) => {
         }
       });
     }
-    return res.status(200).json(posts);
+    return res
+      .status(200)
+      .json({ posts, page: pageOptions.page, limit: pageOptions.limit });
 
     // posts.forEach((item) => {
     //   if (!req.user) {
