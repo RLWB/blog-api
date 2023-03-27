@@ -4,7 +4,9 @@ const handleToken = (req, res, next) => {
   try {
     const user = jwt.verify(req.headers.authorization, key);
     req.user = user;
-  } catch (error) {}
+  } catch (error) {
+    console.log("token无效:", error);
+  }
   next();
 };
 
